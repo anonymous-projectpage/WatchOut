@@ -117,7 +117,11 @@
     .decision-vs{display:grid;place-items:center;color:#98a2b3;font-weight:800}
 
     .benchmarks{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .benchmark h3{margin:0 0 6px}
+    .benchmark{display:block;cursor:pointer;position:relative}
+    .benchmark h3{margin:0 0 6px;padding-right:28px}
+    .benchmark h3::after{content:"↗";position:absolute;top:20px;right:22px;color:var(--paper-blue);font-size:1rem;font-family:Inter,ui-sans-serif,system-ui,sans-serif;transition:transform .2s ease}
+    .benchmark:hover h3::after{transform:translate(2px,-2px)}
+    .benchmark:focus-visible{outline:3px solid rgba(49,95,184,.22);outline-offset:3px}
     .benchmark p{margin:0;color:#667085}
     .benchmark .mini{margin-top:14px;font-size:.88rem;color:#475467}
     .scope-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
@@ -272,8 +276,8 @@
       <p class="lead">WatchOut is evaluated under dynamic object-level disturbances using π<sub>0.5</sub> and X-VLA on RoboTwin 2.0 and LIBERO-Long, with the same execution protocol used for all baselines.</p>
     </div>
     <div class="benchmarks">
-      <div class="card benchmark reveal"><h3>RoboTwin 2.0</h3><p>Long-horizon manipulation tasks with small and large object displacements introduced after an action chunk has been generated.</p><div class="mini"><strong>Backbones:</strong> π<sub>0.5</sub>, X-VLA</div></div>
-      <div class="card benchmark reveal delay-1"><h3>LIBERO-Long</h3><p>Long-horizon language-conditioned manipulation tasks evaluated under the same retain-or-replan setting.</p><div class="mini"><strong>Backbones:</strong> π<sub>0.5</sub>, X-VLA</div></div>
+      <a class="card benchmark reveal" href="https://robotwin-platform.github.io/" target="_blank" rel="noopener noreferrer" aria-label="Open the RoboTwin 2.0 project page"><h3>RoboTwin 2.0</h3><p>Long-horizon manipulation tasks with small and large object displacements introduced after an action chunk has been generated.</p><div class="mini"><strong>Backbones:</strong> π<sub>0.5</sub>, X-VLA</div></a>
+      <a class="card benchmark reveal delay-1" href="https://libero-project.github.io/main.html" target="_blank" rel="noopener noreferrer" aria-label="Open the LIBERO project page"><h3>LIBERO-Long</h3><p>Long-horizon language-conditioned manipulation tasks evaluated under the same retain-or-replan setting.</p><div class="mini"><strong>Backbones:</strong> π<sub>0.5</sub>, X-VLA</div></a>
     </div>
     <div class="scope-row reveal">
       <div class="scope-pill"><b>2</b><span>VLA backbones</span></div>
