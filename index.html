@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Anonymous project page for WatchOut: Adaptive Action-Chunk Execution for Vision-Language-Action Models." />
+  <meta name="author" content="Anonymous Author(s)" />
+  <title>WatchOut | Anonymous Project Page</title>
+  <style>
+    :root{
+      --bg:#f7f8fb; --surface:#ffffff; --ink:#172033; --muted:#667085;
+      --line:#e6e8ee; --blue:#2457d6; --blue-soft:#eef3ff; --orange:#f5a000;
+      --red:#c83d30; --green:#1b8f5a; --shadow:0 14px 40px rgba(23,32,51,.08);
+      --radius:20px; --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{width:min(var(--max),calc(100% - 36px));margin:0 auto}
+    nav{position:sticky;top:0;z-index:20;background:rgba(247,248,251,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(230,232,238,.85)}
+    .nav-inner{height:66px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{font-weight:850;letter-spacing:-.02em;font-size:1.08rem}
+    .brand span{color:var(--blue)}
+    .nav-links{display:flex;gap:20px;font-size:.92rem;color:#475467;flex-wrap:wrap}
+    .nav-links a:hover{color:var(--blue)}
+    .hero{padding:72px 0 42px;text-align:center}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-weight:750;font-size:.82rem;border:1px solid #dce6ff}
+    .hero h1{max-width:940px;margin:18px auto 12px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.25rem,5vw,4.35rem);line-height:1.08;letter-spacing:-.035em}
+    .subtitle{max-width:860px;margin:0 auto;color:#475467;font-size:clamp(1rem,2.2vw,1.22rem)}
+    .authors{margin-top:16px;font-weight:650;color:#344054}
+    .hero-actions{margin-top:28px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:9px;padding:11px 16px;border-radius:11px;border:1px solid var(--line);background:#fff;font-weight:720;box-shadow:0 4px 14px rgba(23,32,51,.05)}
+    .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .btn.disabled{color:#98a2b3;background:#f9fafb;pointer-events:none;box-shadow:none}
+    .quick-nav{margin:28px auto 0;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+    .chip{padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#667085;font-size:.82rem}
+    section{padding:54px 0;scroll-margin-top:72px}
+    .section-head{margin-bottom:24px}
+    .eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+    h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.75rem,3vw,2.55rem);margin:6px 0 8px;letter-spacing:-.02em}
+    .lead{color:#5d6677;max-width:820px;margin:0;font-size:1.02rem}
+    .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .panel.pad{padding:28px}
+    .figure{padding:16px;background:#fff}
+    .figure img{width:100%;border-radius:12px;cursor:zoom-in}
+    .caption{padding:0 18px 18px;color:#667085;font-size:.9rem}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 7px 24px rgba(23,32,51,.05)}
+    .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue);font-weight:850;margin-bottom:14px}
+    .card h3{margin:0 0 8px;font-size:1.04rem}
+    .card p{margin:0;color:#667085;font-size:.93rem}
+    .callout{border-left:4px solid var(--blue);background:#f3f6ff;padding:18px 20px;border-radius:0 14px 14px 0;color:#344054}
+    .callout strong{color:var(--ink)}
+    .split{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:start}
+    .formula{font-family:"Times New Roman",serif;font-size:1.07rem;background:#111827;color:#f9fafb;padding:18px;border-radius:14px;overflow:auto}
+    .formula .muted{color:#c5cedc;font-family:Inter,sans-serif;font-size:.82rem}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .tag{font-size:.78rem;padding:5px 8px;background:#f2f4f7;border-radius:999px;color:#475467}
+    .benchmarks{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .benchmark h3{margin:0 0 6px}
+    .benchmark p{margin:0;color:#667085}
+    .benchmark .mini{margin-top:14px;font-size:.88rem;color:#475467}
+    .result-note{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:14px}
+    .dot{width:11px;height:11px;background:var(--green);border-radius:50%;margin-top:7px;flex:none}
+    .result-note p{margin:0;color:#5d6677}
+    .real-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .real-card{padding:22px;background:#fff;border:1px solid var(--line);border-radius:16px}
+    .real-card h3{margin:0 0 7px}
+    .real-card p{margin:0;color:#667085}
+    .bibtex{position:relative;background:#101828;color:#e6edf7;border-radius:14px;padding:18px 52px 18px 18px;overflow:auto;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;white-space:pre}
+    .copy{position:absolute;top:10px;right:10px;border:1px solid #344054;background:#1d2939;color:#fff;border-radius:8px;padding:6px 9px;font-size:.78rem;cursor:pointer}
+    footer{padding:34px 0 50px;color:#98a2b3;text-align:center;font-size:.85rem}
+    .lightbox{position:fixed;inset:0;background:rgba(10,15,28,.88);display:none;align-items:center;justify-content:center;z-index:100;padding:28px}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:min(1400px,96vw);max-height:90vh;border-radius:10px;background:#fff}
+    .lightbox button{position:absolute;top:18px;right:20px;border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:999px;width:42px;height:42px;font-size:1.4rem;cursor:pointer}
+    @media(max-width:820px){.grid,.split,.benchmarks,.real-grid{grid-template-columns:1fr}.nav-links{display:none}.hero{padding-top:52px}.panel.pad{padding:20px}}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">Watch<span>Out</span></a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a><a href="#method">Method</a><a href="#evaluation">Evaluation</a><a href="#results">Results</a><a href="#real">Real Robot</a><a href="#citation">Citation</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="badge">ICRA 2027 Submission · Anonymous Project Page</div>
+    <h1>WatchOut: Adaptive Action-Chunk Execution for Vision-Language-Action Models</h1>
+    <p class="subtitle">Explicitly reassessing whether the <em>currently active action chunk</em> should be retained or replaced under updated observations.</p>
+    <div class="authors">Anonymous Author(s)</div>
+    <div class="hero-actions">
+      <a class="btn primary" href="paper.pdf" target="_blank" rel="noopener">Paper</a>
+      <span class="btn disabled">Code · Coming Soon</span>
+      <span class="btn disabled">Video · Coming Soon</span>
+    </div>
+    <div class="quick-nav">
+      <a class="chip" href="#overview">Teaser</a><a class="chip" href="#method">Framework</a><a class="chip" href="#evaluation">Benchmarks</a><a class="chip" href="#results">Results</a><a class="chip" href="#real">Real Robot</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="overview">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Overview</div>
+      <h2>When should the active plan be reconsidered?</h2>
+      <p class="lead">Fixed-horizon execution can continue outdated actions after a disturbance, while frequent replanning can repeatedly replace a coherent plan. WatchOut treats active-plan reassessment as a separate execution-time decision.</p>
+    </div>
+    <div class="panel figure">
+      <img src="assets/teaser.png" alt="Motivation comparing fixed-horizon execution, frequent replanning, and WatchOut" data-lightbox>
+      <div class="caption">WatchOut selectively retains or replans an active action chunk under updated observations, balancing temporal consistency and closed-loop responsiveness.</div>
+    </div>
+    <div style="height:18px"></div>
+    <div class="callout"><strong>Core idea.</strong> WatchOut separates <em>when</em> the active plan should be reconsidered from <em>which</em> candidate should replace it.</div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Method</div>
+      <h2>Active-plan reassessment + value-guided replacement</h2>
+      <p class="lead">The framework combines offline actor–critic preparation with an execution-time retain-or-replan mechanism based on current action consistency.</p>
+    </div>
+    <div class="panel figure">
+      <img src="assets/framework.png" alt="WatchOut framework with offline actor-critic preparation, action-consistency estimation, and adaptive execution" data-lightbox>
+      <div class="caption">WatchOut first prepares a value-aware VLA policy, then compares the scheduled action with immediately executable candidate actions and uses a chunk-level critic only when replacement is triggered.</div>
+    </div>
+    <div style="height:18px"></div>
+    <div class="grid">
+      <div class="card"><div class="num">1</div><h3>Active-to-candidate disagreement</h3><p>Compare the action scheduled by the active chunk with immediately executable actions sampled from the latest observation.</p></div>
+      <div class="card"><div class="num">2</div><h3>Candidate agreement</h3><p>Use agreement across current candidates as complementary evidence that disagreement with the active action is consistently supported.</p></div>
+      <div class="card"><div class="num">3</div><h3>Value-guided replacement</h3><p>If replanning is triggered, rank candidate chunks with the conservative chunk-level critic and activate the highest-valued candidate.</p></div>
+    </div>
+    <div style="height:20px"></div>
+    <div class="split">
+      <div class="panel pad">
+        <h3 style="margin-top:0">Retain-or-replan score</h3>
+        <p style="color:#667085">Let <strong>C<sub>ac</sub></strong> measure active-to-candidate consistency and <strong>C<sub>cc</sub></strong> measure candidate-to-candidate consistency. Replanning evidence becomes stronger when current candidates agree with one another but deviate from the scheduled action.</p>
+        <div class="formula">C<sub>t</sub> = α C<sub>t,cc</sub> − β C<sub>t,ac</sub><br><span class="muted">replan if C<sub>t</sub> exceeds the decision boundary δ</span></div>
+        <div class="tags"><span class="tag">M = 16 candidates</span><span class="tag">α = β = 1</span><span class="tag">δ = 0.2</span></div>
+      </div>
+      <div class="panel pad">
+        <h3 style="margin-top:0">Replacement selection</h3>
+        <p style="color:#667085">Action consistency decides <em>whether</em> to reconsider the active plan; the critic decides <em>which</em> candidate should replace it.</p>
+        <div class="formula">m<sup>*</sup><sub>t</sub> = arg max<sub>m</sub> Q<sub>ϕ</sub>(o<sub>t</sub>, A<sup>(m)</sup><sub>t</sub>)<br><span class="muted">Q<sub>ϕ</sub> is a conservative chunk-level value estimate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="evaluation">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Evaluation</div>
+      <h2>Two VLA backbones, two manipulation benchmarks</h2>
+      <p class="lead">WatchOut is evaluated under dynamic object-level disturbances using two action-chunk VLA backbones and two long-horizon manipulation benchmarks.</p>
+    </div>
+    <div class="benchmarks">
+      <div class="card benchmark"><h3>RoboTwin 2.0</h3><p>Long-horizon manipulation tasks with dynamic object displacements introduced during action-chunk execution.</p><div class="mini"><strong>Backbones:</strong> π<sub>0.5</sub>, X-VLA</div></div>
+      <div class="card benchmark"><h3>LIBERO-Long</h3><p>Long-horizon language-conditioned manipulation tasks evaluated under the same retain-or-replan setting.</p><div class="mini"><strong>Backbones:</strong> π<sub>0.5</sub>, X-VLA</div></div>
+    </div>
+    <div style="height:18px"></div>
+    <div class="panel figure">
+      <img src="assets/disturbances.png" alt="Examples of small and large dynamic object disturbances" data-lightbox>
+      <div class="caption">Simulation disturbances displace task-relevant objects after an action chunk has been generated, creating different levels of mismatch between the active plan and the updated scene.</div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Results</div>
+      <h2>Selective replanning improves robustness under disturbances</h2>
+      <p class="lead">Across the evaluated settings, WatchOut is compared against fixed-horizon execution, frequent replanning, temporal ensembling, bidirectional decoding, and adaptive action chunking.</p>
+    </div>
+    <div class="panel figure">
+      <img src="assets/main_results.png" alt="Main quantitative results table for WatchOut" data-lightbox>
+      <div class="caption">Main success-rate comparison across RoboTwin 2.0 and LIBERO-Long with π<sub>0.5</sub> and X-VLA. Replace this image with the final table when all ongoing runs are complete.</div>
+    </div>
+    <div style="height:18px"></div>
+    <div class="split">
+      <div class="panel figure">
+        <img src="assets/qualitative.png" alt="Qualitative comparison between non-adaptive execution and WatchOut" data-lightbox>
+        <div class="caption">Without adaptive execution, the pre-disturbance chunk continues and can fail. WatchOut detects inconsistency, replans, and recovers.</div>
+      </div>
+      <div class="panel figure">
+        <img src="assets/replanning_analysis.png" alt="Replanning score and Q-guided candidate selection analysis" data-lightbox>
+        <div class="caption">The replanning score responds to disturbance-induced incompatibility, while the critic ranks replacement candidates after replanning is triggered.</div>
+      </div>
+    </div>
+    <div style="height:18px"></div>
+    <div class="result-note"><span class="dot"></span><p><strong>Interpretation:</strong> WatchOut preserves the current plan when it remains compatible with updated predictions and replaces it only when current candidates provide consistent evidence for reconsideration.</p></div>
+  </div>
+</section>
+
+<section id="real">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Real-Robot Evaluation</div>
+      <h2>Physical disturbances with SO-ARM101</h2>
+      <p class="lead">The real-robot protocol manually displaces a task-relevant object during chunk execution without resetting the episode, requiring online retain-or-replan decisions under real sensing and actuation.</p>
+    </div>
+    <div class="real-grid">
+      <div class="real-card"><h3>Replan when the scene changes</h3><p>When a physical displacement makes the active action incompatible with updated predictions, WatchOut triggers replanning and redirects execution toward the changed scene.</p></div>
+      <div class="real-card"><h3>Retain when the plan remains compatible</h3><p>When the scheduled action remains compatible with the latest observation, WatchOut retains the active chunk rather than continually replacing the plan.</p></div>
+    </div>
+    <p style="margin-top:14px;color:#98a2b3;font-size:.88rem">Real-robot visual assets can be inserted here once the final anonymous evaluation figures are ready.</p>
+  </div>
+</section>
+
+<section id="citation">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">Citation</div><h2>Anonymous submission</h2><p class="lead">This project page intentionally contains no author or affiliation information. Update the citation only after the review process permits de-anonymization.</p></div>
+    <div class="bibtex" id="bibtex">@misc{anonymous2027watchout,
+  title  = {WatchOut: Adaptive Action-Chunk Execution for Vision-Language-Action Models},
+  author = {Anonymous Author(s)},
+  note   = {Anonymous ICRA 2027 submission},
+  year   = {2027}
+}<button class="copy" onclick="copyBibtex()">Copy</button></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">Anonymous project page for double-blind review. No identifying author, affiliation, repository, or analytics information is included.</div></footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded figure"><button aria-label="Close">×</button><img alt="Expanded figure"></div>
+<script>
+  const lb=document.getElementById('lightbox'), lbImg=lb.querySelector('img');
+  document.querySelectorAll('[data-lightbox]').forEach(img=>img.addEventListener('click',()=>{lbImg.src=img.src;lbImg.alt=img.alt;lb.classList.add('open')}));
+  lb.addEventListener('click',e=>{if(e.target===lb||e.target.tagName==='BUTTON')lb.classList.remove('open')});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open')});
+  async function copyBibtex(){
+    const box=document.getElementById('bibtex');
+    const text=box.childNodes[0].textContent.trim();
+    try{await navigator.clipboard.writeText(text); const b=box.querySelector('.copy'); b.textContent='Copied'; setTimeout(()=>b.textContent='Copy',1200)}catch(e){}
+  }
+</script>
+</body>
+</html>
