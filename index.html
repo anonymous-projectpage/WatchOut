@@ -207,9 +207,9 @@
     <p class="subtitle">Reassess the <em>currently active action chunk</em> under the latest observation, retain it when it remains compatible, and replan only when current predictions consistently support reconsideration.</p>
     <div class="authors">Anonymous Author(s)</div>
     <div class="hero-actions">
-      <a class="btn primary" href="paper.pdf" target="_blank" rel="noopener">Paper</a>
-      <span class="btn disabled">Code · Coming Soon</span>
-      <span class="btn disabled">Video · Coming Soon</span>
+      <a class="btn primary" target="_blank" rel="noopener">Paper</a>
+      <span class="btn disabled">Code</span>
+      <span class="btn disabled">Video</span>
     </div>
     <div class="quick-nav">
       <a class="chip" href="#overview">Motivation</a><a class="chip" href="#method">Framework</a><a class="chip" href="#evaluation">Benchmarks</a><a class="chip" href="#results">Analysis</a><a class="chip" href="#real">Real Robot</a>
@@ -288,12 +288,12 @@
         <h3 style="margin-top:0">Consistency-based replanning score</h3>
         <p style="color:#667085">A low active-to-candidate consistency indicates deviation from the active action, while a high candidate-to-candidate consistency indicates that current predictions support a common alternative.</p>
         <div class="formula">C<sub>t</sub> = α C<sub>t,cc</sub> − β C<sub>t,ac</sub><br><span class="muted">replan if C<sub>t</sub> &gt; δ; otherwise retain the active chunk</span></div>
-        <div class="tags"><span class="tag">M = 16 candidates</span><span class="tag">α = β = 1.0</span><span class="tag">δ = 0.2</span></div>
+        <!-- <div class="tags"><span class="tag">M = 16 candidates</span><span class="tag">α = β = 1.0</span><span class="tag">δ = 0.2</span></div> -->
       </div>
       <div class="panel pad reveal delay-1">
         <h3 style="margin-top:0">Value-guided replacement</h3>
         <p style="color:#667085">Candidate valuation is deliberately downstream of the retain-or-replan decision.</p>
-        <div class="formula">m<sup>*</sup><sub>t</sub> = arg max<sub>m</sub> Q<sub>ϕ</sub>(o<sub>t</sub>, A<sup>(m)</sup><sub>t</sub>)<br><span class="muted">Q<sub>ϕ</sub> is the conservative chunk-level value estimate</span></div>
+        <div class="formula">m<sup>*</sup><sub>t</sub> = arg max<sub>m</sub> Q<sub>ϕ</sub>(o<sub>t</sub>, A<sub>t</sub><sup>(m)</sup>)<br><span class="muted">Q<sub>ϕ</sub> is the conservative chunk-level value estimate</span></div>
         <div class="decision-flow">
           <div class="decision-box retain"><h3>Retain</h3><p>Keep the remaining active chunk when it remains compatible.</p></div>
           <div class="decision-vs">or</div>
