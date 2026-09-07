@@ -86,6 +86,22 @@
     .figure img{width:100%;border-radius:12px;cursor:zoom-in;background:#fff}
     .caption{padding:11px 12px 3px;color:#667085;font-size:.9rem}
 
+    .motivation-split{display:grid;grid-template-columns:.82fr 1.18fr;gap:24px;align-items:stretch}
+    .motivation-copy{padding:26px 26px 24px;background:linear-gradient(145deg,#f6f9ff 0%,#fff 72%);border:1px solid #dbe5f6;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .motivation-copy h3{margin:0 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:1.42rem;line-height:1.3;letter-spacing:-.018em}
+    .motivation-copy>p{margin:0 0 19px;color:#5d6677;font-size:.96rem}
+    .motivation-points{display:grid;gap:11px}
+    .motivation-point{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;padding:12px 13px;background:rgba(255,255,255,.82);border:1px solid #e3e9f3;border-radius:13px}
+    .motivation-point .mark{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;font-size:.78rem;font-weight:850}
+    .motivation-point.fixed .mark{background:#fff3e2;color:#a96608}
+    .motivation-point.frequent .mark{background:#fceeed;color:#a73a34}
+    .motivation-point.watchout .mark{background:var(--paper-blue-soft);color:var(--paper-blue)}
+    .motivation-point b{display:block;font-size:.91rem;margin:1px 0 2px}
+    .motivation-point span{display:block;color:#667085;font-size:.84rem;line-height:1.45}
+    .motivation-figure{padding:14px;display:flex;flex-direction:column;justify-content:center}
+    .motivation-figure img{width:100%;max-height:430px;object-fit:contain}
+    .motivation-figure .caption{margin-top:auto}
+
     .rq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
     .rq-card{background:var(--paper-blue-soft);border:1px solid #d8e3f8;border-radius:16px;padding:20px 22px}
     .rq-card b{color:var(--paper-blue);font-style:italic}
@@ -154,7 +170,7 @@
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
     @media(max-width:900px){
-      .grid,.split,.benchmarks,.real-grid,.result-grid{grid-template-columns:1fr}
+      .grid,.split,.benchmarks,.real-grid,.result-grid,.motivation-split{grid-template-columns:1fr}
       .scope-row{grid-template-columns:repeat(2,1fr)}
       .novelty-strip{grid-template-columns:1fr;gap:8px}.arrow{transform:rotate(90deg)}
       .decision-flow{grid-template-columns:1fr}.decision-vs{min-height:22px}
@@ -214,9 +230,29 @@
       <h2>Not always continue. Not always replan.</h2>
       <p class="lead">Fixed-horizon execution can keep following an outdated chunk after the scene changes, while frequent replanning can repeatedly replace an otherwise coherent plan. WatchOut makes active-plan reassessment an explicit execution-time decision.</p>
     </div>
-    <div class="panel figure reveal">
-      <img src="Figure/intro2.png" alt="Motivation comparing fixed-horizon execution, frequent replanning, and WatchOut" data-lightbox>
-      <div class="caption"><strong>Motivation.</strong> WatchOut selectively retains or replans an active action chunk under updated observations to balance temporal consistency and closed-loop responsiveness.</div>
+    <div class="motivation-split">
+      <div class="motivation-copy reveal">
+        <h3>The missing execution-time decision</h3>
+        <p>The central question is not simply how often to generate a new chunk, but whether the <strong>currently active chunk should still be trusted</strong> after the observation changes.</p>
+        <div class="motivation-points">
+          <div class="motivation-point fixed">
+            <div class="mark">FH</div>
+            <div><b>Fixed-horizon execution</b><span>Preserves temporal coherence, but can continue actions that became outdated after a disturbance.</span></div>
+          </div>
+          <div class="motivation-point frequent">
+            <div class="mark">FR</div>
+            <div><b>Frequent replanning</b><span>Responds quickly to new observations, but repeatedly replaces an otherwise coherent active plan.</span></div>
+          </div>
+          <div class="motivation-point watchout">
+            <div class="mark">W</div>
+            <div><b>WatchOut</b><span>Explicitly reassesses the active chunk and replans only when current predictions consistently support reconsideration.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel figure motivation-figure reveal delay-1">
+        <img src="Figure/intro2.png" alt="Motivation comparing fixed-horizon execution, frequent replanning, and WatchOut" data-lightbox>
+        <div class="caption"><strong>Motivation.</strong> WatchOut balances temporal consistency and closed-loop responsiveness through selective active-plan reassessment.</div>
+      </div>
     </div>
     <div class="rq-grid">
       <div class="rq-card reveal delay-1"><b>RQ1.</b><p>Does explicitly reassessing the active action chunk improve robustness to dynamic disturbances over existing action-chunk execution strategies?</p></div>
