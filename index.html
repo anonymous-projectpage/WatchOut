@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Anonymous project page for WatchOut: Adaptive Action-Chunk Execution for Vision-Language-Action Models." />
+  <meta name="description" content="Anonymous project page for WatchOut: Active-Plan Reassessment for Adaptive Execution of Action-Chunking Vision-Language-Action Models." />
   <meta name="author" content="Anonymous Author(s)" />
   <meta name="color-scheme" content="light" />
   <title>WatchOut | Anonymous Project Page</title>
@@ -172,6 +172,23 @@
     .real-card h3{margin:0 0 7px}
     .real-card p{margin:0;color:#667085}
 
+    .positioning{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 7px 24px rgba(23,32,51,.04)}
+    .positioning-head{display:flex;justify-content:space-between;gap:18px;align-items:baseline;margin-bottom:15px;flex-wrap:wrap}
+    .positioning-head span{font-size:.76rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-blue)}
+    .positioning-head strong{font-family:Georgia,"Times New Roman",serif;font-size:1.08rem;font-weight:700;color:#27364f}
+    .positioning-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .positioning-card{padding:16px;border:1px solid #e5e9f0;border-radius:14px;background:#fbfcfe}
+    .positioning-card.proposed{background:var(--paper-blue-softer);border-color:#ccdafa;box-shadow:inset 0 3px 0 var(--paper-blue)}
+    .positioning-card b{display:block;margin-bottom:5px;font-size:.93rem}
+    .positioning-card p{margin:0 0 10px;color:#667085;font-size:.86rem;line-height:1.45}
+    .positioning-card span{display:block;color:#475467;font-size:.8rem;line-height:1.4}
+
+    .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .metric-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 7px 24px rgba(23,32,51,.045)}
+    .metric-big{font-family:Georgia,"Times New Roman",serif;font-size:2rem;font-weight:800;line-height:1;color:var(--paper-blue);margin-bottom:12px}
+    .metric-card h3{margin:0 0 7px;font-size:.96rem}
+    .metric-card p{margin:0;color:#667085;font-size:.85rem;line-height:1.48}
+
     .bibtex{position:relative;background:#101828;color:#e6edf7;border-radius:14px;padding:18px 52px 18px 18px;overflow:auto;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;white-space:pre}
     .copy{position:absolute;top:10px;right:10px;border:1px solid #344054;background:#1d2939;color:#fff;border-radius:8px;padding:6px 9px;font-size:.78rem;cursor:pointer}
     footer{padding:34px 0 50px;color:#98a2b3;text-align:center;font-size:.85rem}
@@ -187,8 +204,9 @@
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
     @media(max-width:900px){
-      .grid,.split,.benchmarks,.real-grid,.result-grid,.motivation-split,.disturbance-split{grid-template-columns:1fr}
+      .grid,.split,.benchmarks,.real-grid,.result-grid,.motivation-split,.disturbance-split,.positioning-grid{grid-template-columns:1fr}
       .scope-row{grid-template-columns:repeat(2,1fr)}
+      .metric-grid{grid-template-columns:repeat(2,1fr)}
       .novelty-strip{grid-template-columns:1fr;gap:8px}.arrow{transform:rotate(90deg)}
       .decision-flow{grid-template-columns:1fr}.decision-vs{min-height:22px}
     }
@@ -202,7 +220,7 @@
       .panel.pad{padding:20px}
       .rq-grid{grid-template-columns:1fr}
     }
-    @media(max-width:500px){.scope-row{grid-template-columns:1fr}.wrap{width:min(var(--max),calc(100% - 24px))}.hero h1{font-size:2.28rem}}
+    @media(max-width:500px){.scope-row,.metric-grid{grid-template-columns:1fr}.wrap{width:min(var(--max),calc(100% - 24px))}.hero h1{font-size:2.28rem}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
@@ -212,7 +230,7 @@
     <a class="brand" href="#top">Watch<span>Out</span></a>
     <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
     <div class="nav-links" id="navLinks">
-      <a href="#overview">Overview</a><a href="#method">Method</a><a href="#evaluation">Evaluation</a><a href="#results">Analysis</a><a href="#real">Real Robot</a>
+      <a href="#overview">Overview</a><a href="#method">Method</a><a href="#evaluation">Evaluation</a><a href="#quantitative">Results</a><a href="#results">Analysis</a><a href="#real">Real Robot</a>
     </div>
   </div>
 </nav>
@@ -220,8 +238,8 @@
 <header class="hero reveal" id="top">
   <div class="wrap">
     <div class="badge">IEEE ICRA 2027 Submission · Project Page</div>
-    <h1>WatchOut: Adaptive Action-Chunk Execution for Vision-Language-Action Models</h1>
-    <p class="subtitle">Reassess the <em>currently active action chunk</em> under the latest observation, retain it when it remains compatible, and replan only when current predictions consistently support reconsideration.</p>
+    <h1>WatchOut: Active-Plan Reassessment for Adaptive Execution of Action-Chunking Vision-Language-Action Models</h1>
+    <p class="subtitle"><strong>Reassess before replacing.</strong> WatchOut asks whether the <em>currently active action chunk</em> is still compatible with predictions from the latest observation, and invokes value-guided replacement only when current predictions consistently support reconsideration.</p>
     <div class="authors">Anonymous Author(s)</div>
     <div class="hero-actions">
       <span class="btn disabled">Paper</span>
@@ -229,12 +247,12 @@
       <a class="btn primary" target="_blank" rel="noopener">Video</a>
     </div>
     <div class="quick-nav">
-      <a class="chip" href="#overview">Motivation</a><a class="chip" href="#method">Framework</a><a class="chip" href="#evaluation">Benchmarks</a><a class="chip" href="#results">Analysis</a><a class="chip" href="#real">Real Robot</a>
+      <a class="chip" href="#overview">Motivation</a><a class="chip" href="#method">Framework</a><a class="chip" href="#evaluation">Benchmarks</a><a class="chip" href="#quantitative">Results</a><a class="chip" href="#results">Analysis</a><a class="chip" href="#real">Real Robot</a>
     </div>
     <div class="novelty-strip" aria-label="WatchOut design principle">
-      <div class="novelty-node"><b>Active plan</b><span>already being executed</span></div><div class="arrow">→</div>
-      <div class="novelty-node"><b>Consistency-based reassessment</b><span>should it still be trusted?</span></div><div class="arrow">→</div>
-      <div class="novelty-node"><b>Value-guided replacement</b><span>only if replanning is triggered</span></div>
+      <div class="novelty-node"><b>Active plan</b><span>what is already being executed?</span></div><div class="arrow">→</div>
+      <div class="novelty-node"><b>Consensus-aware reassessment</b><span>does the latest policy still support it?</span></div><div class="arrow">→</div>
+      <div class="novelty-node"><b>Selective replacement</b><span>value guidance only after replanning is warranted</span></div>
     </div>
   </div>
 </header>
@@ -245,7 +263,7 @@
     <div class="section-head reveal">
       <div class="eyebrow">Motivation</div>
       <h2>Not always continue. Not always replan.</h2>
-      <p class="lead">Fixed-horizon execution can keep following an outdated chunk after the scene changes, while frequent replanning can repeatedly replace an otherwise coherent plan. WatchOut makes active-plan reassessment an explicit execution-time decision.</p>
+      <p class="lead">Fixed-horizon execution can keep following an outdated chunk after the scene changes, while frequent replanning can repeatedly replace an otherwise coherent plan. Existing adaptive strategies mainly change how updated predictions are incorporated or how long a chunk is executed; WatchOut instead makes <strong>active-plan validity</strong> an explicit execution-time decision.</p>
     </div>
     <div class="motivation-split">
       <div class="motivation-copy reveal">
@@ -277,7 +295,30 @@
     </div>
     <div class="core-callout reveal">
       <div class="core-icon">★</div>
-      <div><strong>Core distinction.</strong> WatchOut separates <em>when</em> the current plan should be reconsidered from <em>which</em> candidate should replace it. This is the key message to keep visually dominant throughout the page.</div>
+      <div><strong>Core distinction.</strong> WatchOut separates <em>when</em> the current plan should be reconsidered from <em>which</em> candidate should replace it. Action consistency triggers reassessment; the chunk-level critic is used only after replanning is warranted.</div>
+    </div>
+    <div class="positioning reveal">
+      <div class="positioning-head">
+        <span>Why this is different</span>
+        <strong>Shift the question from “how to update?” to “should the active plan still be trusted?”</strong>
+      </div>
+      <div class="positioning-grid">
+        <div class="positioning-card">
+          <b>Prediction integration</b>
+          <p>Temporal ensembling and guided decoding coordinate or combine updated predictions across timesteps.</p>
+          <span>Question: <em>How should new predictions be incorporated?</em></span>
+        </div>
+        <div class="positioning-card">
+          <b>Adaptive horizon</b>
+          <p>Uncertainty- or phase-aware execution changes how long a generated chunk is followed.</p>
+          <span>Question: <em>How long should this chunk be executed?</em></span>
+        </div>
+        <div class="positioning-card proposed">
+          <b>WatchOut</b>
+          <p>Reassesses the currently active chunk itself before deciding whether any replacement is needed.</p>
+          <span>Question: <em>Is the active plan still valid now?</em></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -295,9 +336,9 @@
     </div>
     <div style="height:18px"></div>
     <div class="grid">
-      <div class="card reveal delay-1"><div class="num">1</div><h3>Reassess the active chunk</h3><p>Ask whether the action scheduled by the previously generated chunk is still compatible with actions predicted from the latest observation.</p></div>
-      <div class="card reveal delay-2"><div class="num">2</div><h3>Use consensus-aware evidence</h3><p>Combine active-to-candidate disagreement with candidate-to-candidate agreement so that replanning is supported across multiple stochastic predictions.</p></div>
-      <div class="card reveal delay-3"><div class="num">3</div><h3>Decouple replacement</h3><p>Consistency decides <em>when</em> to replan; the conservative chunk-level critic decides <em>which</em> candidate becomes the new active chunk.</p></div>
+      <div class="card reveal delay-1"><div class="num">1</div><h3>Reassess the active chunk</h3><p>Evaluate the plan already being executed, rather than automatically replacing it or only predicting an execution horizon.</p></div>
+      <div class="card reveal delay-2"><div class="num">2</div><h3>Require consensus, not one sample</h3><p>Combine active-to-candidate disagreement with candidate-to-candidate agreement so a single stochastic prediction is not sufficient evidence for replanning.</p></div>
+      <div class="card reveal delay-3"><div class="num">3</div><h3>Separate trigger from replacement</h3><p>Consistency decides <em>when</em> to replan; the conservative chunk-level critic decides <em>which</em> candidate becomes the new active chunk only after that decision.</p></div>
     </div>
     <div style="height:20px"></div>
     <div class="split">
@@ -309,7 +350,7 @@
       </div>
       <div class="panel pad reveal delay-1">
         <h3 style="margin-top:0">Value-guided replacement</h3>
-        <p style="color:#667085">Candidate valuation is deliberately downstream of the retain-or-replan decision.</p>
+        <p style="color:#667085">Candidate valuation is deliberately downstream of the retain-or-replan decision; the critic does <strong>not</strong> act as the replanning trigger.</p>
         <div class="formula">m<sup>*</sup><sub>t</sub> = arg max<sub>m</sub> Q<sub>ϕ</sub>(o<sub>t</sub>, A<sub>t</sub><sup>(m)</sup>)<br><span class="muted">Q<sub>ϕ</sub> is the conservative chunk-level value estimate</span></div>
         <div class="decision-flow">
           <div class="decision-box retain"><h3>Retain</h3><p>Keep the remaining active chunk when it remains compatible.</p></div>
@@ -366,12 +407,49 @@
   </div>
 </section>
 
+
+<section id="quantitative">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Quantitative Results</div>
+      <h2>Robustness gains are strongest with π<sub>0.5</sub>, with complementary evidence on X-VLA</h2>
+      <p class="lead">Under dynamic disturbances, WatchOut achieves the best success rate on five of seven π<sub>0.5</sub> tasks in Table I. X-VLA is more task-dependent; on Beat Block Hammer, WatchOut reaches 83.3% versus 80.0% for AAC and 73.3% for Fixed-Horizon.</p>
+    </div>
+    <div class="metric-grid">
+      <div class="metric-card reveal">
+        <div class="metric-big">5 / 7</div>
+        <h3>Best π<sub>0.5</sub> task results</h3>
+        <p>WatchOut is best on five of the seven reported disturbance tasks with the π<sub>0.5</sub> backbone.</p>
+      </div>
+      <div class="metric-card reveal delay-1">
+        <div class="metric-big">65.0%</div>
+        <h3>RoboTwin · Place Empty Cup</h3>
+        <p>WatchOut: 65.0 ± 5.0 vs. Fixed-Horizon: 56.7 ± 15.3 and AAC: 63.3 ± 10.4.</p>
+      </div>
+      <div class="metric-card reveal delay-2">
+        <div class="metric-big">72.0%</div>
+        <h3>LIBERO · Soup&amp;Sauce to Basket</h3>
+        <p>WatchOut: 72.0 ± 9.2 vs. Fixed-Horizon: 14.0 ± 6.6 and AAC: 70.0 ± 19.1.</p>
+      </div>
+      <div class="metric-card reveal delay-3">
+        <div class="metric-big">83.3%</div>
+        <h3>X-VLA · Beat Block Hammer</h3>
+        <p>WatchOut: 83.3 ± 10.4 vs. Fixed-Horizon: 73.3 ± 16.1 and AAC: 80.0 ± 5.0.</p>
+      </div>
+    </div>
+    <div class="result-note reveal" style="margin-top:16px">
+      <span class="dot"></span>
+      <p><strong>Takeaway:</strong> the empirical claim is robustness under dynamic disturbances, not universal dominance on every task. The project page therefore highlights representative gains while keeping the task-dependent X-VLA behavior explicit.</p>
+    </div>
+  </div>
+</section>
+
 <section id="results">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Behavior Analysis</div>
-      <h2>Selective replanning is visible in both behavior and value traces</h2>
-      <p class="lead">The qualitative and trajectory-level analyses expose the two roles directly: action consistency determines the replanning event, and the chunk-level critic ranks replacement candidates after that event.</p>
+      <h2>Mechanism analysis: when replanning fires and what happens next</h2>
+      <p class="lead">The informative mechanism is the retain-or-replan trigger: action consistency determines <em>when</em> the active plan is reconsidered. Candidate value ranking is downstream evidence for <em>which</em> replacement is used after that trigger.</p>
     </div>
     <div class="result-grid">
       <div class="panel figure reveal">
@@ -380,11 +458,11 @@
       </div>
       <div class="panel figure reveal delay-1">
         <img src="Figure/action_consistency.png" alt="Replanning score and Q-guided candidate selection analysis" data-lightbox>
-        <div class="caption"><strong>Retain-or-replan analysis.</strong> The consistency score responds to disturbance-induced mismatch; at triggered replans, the critic selects a high-valued replacement candidate.</div>
+        <div class="caption"><strong>Retain-or-replan analysis.</strong> The key diagnostic is the consistency score crossing the decision boundary. Critic values are shown only after replanning has been triggered, reflecting replacement selection rather than the replanning decision itself.</div>
       </div>
     </div>
     <div style="height:18px"></div>
-    <div class="result-note reveal"><span class="dot"></span><p><strong>Interpretation:</strong> the page should emphasize selective plan reassessment rather than presenting WatchOut as another horizon-adaptation method. Quantitative claims should be synchronized with the final frozen result table.</p></div>
+    <div class="result-note reveal"><span class="dot"></span><p><strong>Interpretation:</strong> WatchOut is not another horizon-adaptation rule. Its central contribution is explicit reassessment of the active plan, with candidate consensus providing robustness to stochastic policy predictions and value guidance used only for replacement selection.</p></div>
   </div>
 </section>
 
@@ -392,8 +470,8 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Real-Robot Evaluation</div>
-      <h2>Human-induced disturbances with SO-ARM101</h2>
-      <p class="lead">A task-relevant object is physically displaced during action-chunk execution without resetting the episode, requiring an online retain-or-replan decision under real sensing, actuation, and interaction.</p>
+      <h2>External physical disturbances with SO-ARM101</h2>
+      <p class="lead">A task-relevant object is physically displaced during action-chunk execution—by human intervention or interaction with another robot—without resetting the episode, requiring an online retain-or-replan decision under real sensing, actuation, and interaction.</p>
     </div>
     <div class="real-grid">
       <div class="real-card reveal"><h3>Replan when compatibility breaks</h3><p>When the active action becomes incompatible with current predictions after a physical displacement, WatchOut triggers replanning and redirects execution toward the changed scene.</p></div>
@@ -401,7 +479,7 @@
     </div>
     <div class="panel figure reveal" id="realRobotFigure" style="margin-top:18px;display:none">
       <img src="Figure/real_robot.png" alt="Real-world WatchOut evaluation using SO-ARM101" data-lightbox>
-      <div class="caption"><strong>Real-world evaluation.</strong> Human-induced object displacement during manipulation with SO-ARM101.</div>
+      <div class="caption"><strong>Real-world evaluation.</strong> External object displacement during manipulation with SO-ARM101, including human and robot interaction.</div>
     </div>
   </div>
 </section>
@@ -410,7 +488,7 @@
   <div class="wrap">
     <div class="section-head reveal"><div class="eyebrow">Citation</div><h2>Anonymous submission</h2><p class="lead">This project page intentionally contains no author or affiliation information. De-anonymize only after the review process permits it.</p></div>
     <div class="bibtex reveal" id="bibtex">@misc{anonymous2027watchout,
-  title  = {WatchOut: Adaptive Action-Chunk Execution for Vision-Language-Action Models},
+  title  = {WatchOut: Active-Plan Reassessment for Adaptive Execution of Action-Chunking Vision-Language-Action Models},
   author = {Anonymous Author(s)},
   note   = {Anonymous ICRA 2027 submission},
   year   = {2027}
