@@ -188,6 +188,14 @@
     .metric-big{font-family:Georgia,"Times New Roman",serif;font-size:2rem;font-weight:800;line-height:1;color:var(--paper-blue);margin-bottom:12px}
     .metric-card h3{margin:0 0 7px;font-size:.96rem}
     .metric-card p{margin:0;color:#667085;font-size:.85rem;line-height:1.48}
+    .result-table{margin-top:18px;padding:18px;background:#fff}
+    .result-table img{width:100%;border-radius:10px;object-fit:contain}
+    .result-table .caption{padding-top:13px}
+    .real-media-stack{display:grid;gap:18px;margin-top:18px}
+    .real-media{padding:16px;background:#fff}
+    .real-media img{width:100%;border-radius:12px;object-fit:contain}
+    .real-media.gif img{background:#f8fafc}
+    .media-label{display:inline-flex;align-items:center;gap:7px;margin-bottom:10px;padding:5px 9px;border-radius:999px;background:var(--paper-blue-soft);color:var(--paper-blue);font-size:.76rem;font-weight:820;letter-spacing:.02em}
 
     .bibtex{position:relative;background:#101828;color:#e6edf7;border-radius:14px;padding:18px 52px 18px 18px;overflow:auto;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;white-space:pre}
     .copy{position:absolute;top:10px;right:10px;border:1px solid #344054;background:#1d2939;color:#fff;border-radius:8px;padding:6px 9px;font-size:.78rem;cursor:pointer}
@@ -412,34 +420,41 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Quantitative Results</div>
-      <h2>Robustness gains are strongest with π<sub>0.5</sub>, with complementary evidence on X-VLA</h2>
-      <p class="lead">Under dynamic disturbances, WatchOut achieves the best success rate on five of seven π<sub>0.5</sub> tasks in Table I. X-VLA is more task-dependent; on Beat Block Hammer, WatchOut reaches 83.3% versus 80.0% for AAC and 73.3% for Fixed-Horizon.</p>
+      <h2>Robust execution across two VLA backbones and two benchmarks</h2>
+      <p class="lead">Table I summarizes success rates under dynamic disturbances for π<sub>0.5</sub> and X-VLA on RoboTwin 2.0 and LIBERO-Long. WatchOut achieves strong gains across many tasks while retaining the task-dependent behavior visible across the two backbones.</p>
     </div>
+
+    <div class="panel figure result-table reveal">
+      <img src="Figure/table.png" alt="Table I comparing WatchOut with fixed-horizon, frequent replanning, Temporal Ensemble, Bidirectional Decoding, and AAC across RoboTwin 2.0 and LIBERO-Long" data-lightbox>
+      <div class="caption"><strong>Main quantitative results.</strong> Success rates under dynamic disturbances using π<sub>0.5</sub> and X-VLA. Bold entries denote the best result for each task.</div>
+    </div>
+
+    <div style="height:18px"></div>
     <div class="metric-grid">
       <div class="metric-card reveal">
         <div class="metric-big">5 / 7</div>
         <h3>Best π<sub>0.5</sub> task results</h3>
-        <p>WatchOut is best on five of the seven reported disturbance tasks with the π<sub>0.5</sub> backbone.</p>
+        <p>WatchOut obtains the best reported success rate on five of seven tasks with the π<sub>0.5</sub> backbone.</p>
       </div>
       <div class="metric-card reveal delay-1">
         <div class="metric-big">65.0%</div>
         <h3>RoboTwin · Place Empty Cup</h3>
-        <p>WatchOut: 65.0 ± 5.0 vs. Fixed-Horizon: 56.7 ± 15.3 and AAC: 63.3 ± 10.4.</p>
+        <p>WatchOut: 65.0 ± 5.0, compared with 56.7 ± 15.3 for Fixed-Horizon and 63.3 ± 10.4 for AAC.</p>
       </div>
       <div class="metric-card reveal delay-2">
         <div class="metric-big">72.0%</div>
         <h3>LIBERO · Soup&amp;Sauce to Basket</h3>
-        <p>WatchOut: 72.0 ± 9.2 vs. Fixed-Horizon: 14.0 ± 6.6 and AAC: 70.0 ± 19.1.</p>
+        <p>WatchOut: 72.0 ± 9.2, compared with 14.0 ± 6.6 for Fixed-Horizon and 70.0 ± 19.1 for AAC.</p>
       </div>
       <div class="metric-card reveal delay-3">
         <div class="metric-big">83.3%</div>
         <h3>X-VLA · Beat Block Hammer</h3>
-        <p>WatchOut: 83.3 ± 10.4 vs. Fixed-Horizon: 73.3 ± 16.1 and AAC: 80.0 ± 5.0.</p>
+        <p>WatchOut: 83.3 ± 10.4, compared with 73.3 ± 16.1 for Fixed-Horizon and 80.0 ± 5.0 for AAC.</p>
       </div>
     </div>
     <div class="result-note reveal" style="margin-top:16px">
       <span class="dot"></span>
-      <p><strong>Takeaway:</strong> the empirical claim is robustness under dynamic disturbances, not universal dominance on every task. The project page therefore highlights representative gains while keeping the task-dependent X-VLA behavior explicit.</p>
+      <p><strong>Takeaway:</strong> WatchOut is designed for robust execution rather than universal task-wise dominance. The results show that explicit active-plan reassessment can improve robustness across diverse disturbance settings while preserving the behavior of the underlying VLA backbone.</p>
     </div>
   </div>
 </section>
@@ -448,21 +463,21 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Behavior Analysis</div>
-      <h2>Mechanism analysis: when replanning fires and what happens next</h2>
-      <p class="lead">The informative mechanism is the retain-or-replan trigger: action consistency determines <em>when</em> the active plan is reconsidered. Candidate value ranking is downstream evidence for <em>which</em> replacement is used after that trigger.</p>
+      <h2>When replanning fires and what happens next</h2>
+      <p class="lead">Action consistency determines <em>when</em> the active plan should be reconsidered, while the chunk-level critic determines <em>which</em> replacement to use after replanning is triggered.</p>
     </div>
     <div class="result-grid">
       <div class="panel figure reveal">
         <img src="Figure/case_study.png" alt="Qualitative comparison between non-adaptive execution and WatchOut under a disturbance" data-lightbox>
-        <div class="caption"><strong>Qualitative case study.</strong> Without adaptive execution, the pre-disturbance chunk continues. WatchOut identifies action inconsistency, replans, and updates the active chunk.</div>
+        <div class="caption"><strong>Qualitative case study.</strong> Without adaptive execution, the pre-disturbance chunk continues. WatchOut detects action inconsistency, replans, and updates the active chunk.</div>
       </div>
       <div class="panel figure reveal delay-1">
         <img src="Figure/action_consistency.png" alt="Replanning score and Q-guided candidate selection analysis" data-lightbox>
-        <div class="caption"><strong>Retain-or-replan analysis.</strong> The key diagnostic is the consistency score crossing the decision boundary. Critic values are shown only after replanning has been triggered, reflecting replacement selection rather than the replanning decision itself.</div>
+        <div class="caption"><strong>Retain-or-replan analysis.</strong> The replanning score determines when the active chunk is reconsidered. Critic values are used only after that decision to rank newly generated replacement candidates.</div>
       </div>
     </div>
     <div style="height:18px"></div>
-    <div class="result-note reveal"><span class="dot"></span><p><strong>Interpretation:</strong> WatchOut is not another horizon-adaptation rule. Its central contribution is explicit reassessment of the active plan, with candidate consensus providing robustness to stochastic policy predictions and value guidance used only for replacement selection.</p></div>
+    <div class="result-note reveal"><span class="dot"></span><p><strong>Interpretation:</strong> WatchOut explicitly separates active-plan reassessment from candidate replacement. Candidate consensus supports robust retain-or-replan decisions under stochastic predictions, while value guidance remains downstream of the replanning trigger.</p></div>
   </div>
 </section>
 
@@ -470,16 +485,27 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Real-Robot Evaluation</div>
-      <h2>External physical disturbances with SO-ARM101</h2>
-      <p class="lead">A task-relevant object is physically displaced during action-chunk execution—by human intervention or interaction with another robot—without resetting the episode, requiring an online retain-or-replan decision under real sensing, actuation, and interaction.</p>
+      <h2>Physical disturbance recovery with SO-ARM101</h2>
+      <p class="lead">We further deploy WatchOut on an SO-ARM101 robot under external physical disturbances. Task-relevant objects are displaced during action-chunk execution by human intervention or interaction with another robot, without resetting the episode.</p>
     </div>
+
     <div class="real-grid">
-      <div class="real-card reveal"><h3>Replan when compatibility breaks</h3><p>When the active action becomes incompatible with current predictions after a physical displacement, WatchOut triggers replanning and redirects execution toward the changed scene.</p></div>
-      <div class="real-card reveal delay-1"><h3>Retain when the plan remains valid</h3><p>When the scheduled action remains compatible with the latest observation, WatchOut retains the active chunk and avoids unnecessary replacement.</p></div>
+      <div class="real-card reveal"><h3>Selective replanning</h3><p>WatchOut reassesses the active chunk after each updated observation and triggers replanning when the scheduled action becomes inconsistent with current predictions.</p></div>
+      <div class="real-card reveal delay-1"><h3>Closed-loop recovery</h3><p>The selected replacement chunk redirects execution toward the displaced object, allowing the task to continue under real sensing and actuation.</p></div>
     </div>
-    <div class="panel figure reveal" id="realRobotFigure" style="margin-top:18px;display:none">
-      <img src="Figure/real_robot.png" alt="Real-world WatchOut evaluation using SO-ARM101" data-lightbox>
-      <div class="caption"><strong>Real-world evaluation.</strong> External object displacement during manipulation with SO-ARM101, including human and robot interaction.</div>
+
+    <div class="real-media-stack">
+      <div class="panel figure real-media reveal">
+        <div class="media-label">Real-world trajectories</div>
+        <img src="Figure/real-world.png" alt="Real-world WatchOut evaluation on Stack Cube, Push Cube, and Pick and Place using the SO-ARM101 robot" data-lightbox>
+        <div class="caption"><strong>Real-world evaluation.</strong> Stack Cube, Push Cube, and Pick and Place under external physical disturbances. Orange boxes mark replanning events, and the final frames show successful task completion.</div>
+      </div>
+
+      <div class="panel figure real-media gif reveal delay-1">
+        <div class="media-label">Real-world video</div>
+        <img src="Figure/real-world.gif" alt="Animated real-world WatchOut execution under physical disturbances using the SO-ARM101 robot">
+        <div class="caption"><strong>Real-world execution video.</strong> The animation shows WatchOut responding online to disturbance-induced scene changes and continuing execution without resetting the episode.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -537,10 +563,6 @@
     try{await navigator.clipboard.writeText(text); const b=box.querySelector('.copy'); b.textContent='Copied'; setTimeout(()=>b.textContent='Copy',1200)}catch(e){}
   }
 
-  // Optional real-robot figure: reveal the panel only if Figure/real_robot.png exists.
-  const rr=document.querySelector('#realRobotFigure img');
-  rr.addEventListener('load',()=>{document.getElementById('realRobotFigure').style.display='block'});
-  rr.addEventListener('error',()=>{document.getElementById('realRobotFigure').remove()});
 </script>
 </body>
 </html>
