@@ -272,12 +272,12 @@
     <div class="section-head reveal">
       <div class="eyebrow">Motivation</div>
       <h2>Not always continue. Not always replan.</h2>
-      <p class="lead">Fixed-horizon execution can keep following an outdated chunk after the scene changes, while frequent replanning can repeatedly replace an otherwise coherent plan. Existing adaptive strategies mainly change how updated predictions are incorporated or how long a chunk is executed; WatchOut instead makes <strong>active-plan validity</strong> an explicit execution-time decision.</p>
+      <p class="lead">Fixed-horizon execution can continue outdated actions, while frequent replanning can disrupt temporal consistency. WatchOut instead makes <strong>active-plan reassessment</strong> an explicit execution-time decision.</p>
     </div>
     <div class="motivation-split">
       <div class="motivation-copy reveal">
         <h3>The missing execution-time decision</h3>
-        <p>The central question is not simply how often to generate a new chunk, but whether the <strong>currently active chunk should still be trusted</strong> after the observation changes.</p>
+        <p>The key question is whether the <strong>currently active chunk should still be trusted</strong> under the latest observation.</p>
         <div class="motivation-points">
           <div class="motivation-point fixed">
             <div class="mark">FH</div>
@@ -345,9 +345,9 @@
     </div>
     <div style="height:18px"></div>
     <div class="grid">
-      <div class="card reveal delay-1"><div class="num">1</div><h3>Reassess the active chunk</h3><p>Evaluate the plan already being executed, rather than automatically replacing it or only predicting an execution horizon.</p></div>
-      <div class="card reveal delay-2"><div class="num">2</div><h3>Use candidate agreement, not one sample</h3><p>Combine active-to-candidate disagreement with candidate-to-candidate agreement so a single stochastic prediction is not sufficient evidence for replanning.</p></div>
-      <div class="card reveal delay-3"><div class="num">3</div><h3>Separate trigger from replacement</h3><p>Consistency decides <em>when</em> to replan; the conservative chunk-level critic decides <em>which</em> candidate becomes the new active chunk only after that decision.</p></div>
+      <div class="card reveal delay-1"><div class="num">1</div><h3>Reassess the active chunk</h3><p>Evaluate the plan already being executed before deciding whether replacement is needed.</p></div>
+      <div class="card reveal delay-2"><div class="num">2</div><h3>Use candidate agreement, not one sample</h3><p>Combine active-to-candidate disagreement with candidate-to-candidate agreement to reduce sensitivity to a single stochastic prediction.</p></div>
+      <div class="card reveal delay-3"><div class="num">3</div><h3>Separate trigger from replacement</h3><p>Consistency decides <em>when</em> to replan; the critic decides <em>which</em> candidate replaces the active chunk.</p></div>
     </div>
     <div style="height:20px"></div>
     <div class="split">
@@ -421,33 +421,29 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Quantitative Results</div>
-      <h2>Robust execution across two VLA backbones and two benchmarks</h2>
-      <p class="lead">Table I summarizes success rates under dynamic disturbances for π<sub>0.5</sub> and X-VLA on RoboTwin 2.0 and LIBERO-Long. The results evaluate WatchOut across different manipulation tasks and action-chunk policies under the same disturbance protocol.</p>
+      <h2>Main results under dynamic disturbances</h2>
+      <p class="lead">Success rates on RoboTwin 2.0 and LIBERO-Long using π<sub>0.5</sub> and X-VLA.</p>
     </div>
 
     <div class="panel figure result-table reveal">
       <img src="Figure/table.png" alt="Table I comparing WatchOut with fixed-horizon, frequent replanning, Temporal Ensemble, Bidirectional Decoding, and AAC across RoboTwin 2.0 and LIBERO-Long" data-lightbox>
-      <div class="caption"><strong>Main quantitative results.</strong> Success rates under dynamic disturbances using π<sub>0.5</sub> and X-VLA. Bold entries denote the best result for each task.</div>
+      <div class="caption"><strong>Main quantitative results.</strong> Success rates under dynamic disturbances. Bold entries denote the best result for each task.</div>
     </div>
 
     <div style="height:18px"></div>
     <div class="metric-grid metric-grid-three">
       <div class="metric-card reveal">
         <div class="metric-big">65.0%</div>
-        <h3>RoboTwin · Place Empty Cup</h3>
+        <h3>Place Empty Cup</h3>
       </div>
       <div class="metric-card reveal delay-1">
         <div class="metric-big">72.0%</div>
-        <h3>LIBERO · Soup&amp;Sauce to Basket</h3>
+        <h3>Soup&amp;Sauce to Basket</h3>
       </div>
       <div class="metric-card reveal delay-2">
         <div class="metric-big">83.3%</div>
-        <h3>X-VLA · Beat Block Hammer</h3>
+        <h3>Beat Block Hammer</h3>
       </div>
-    </div>
-    <div class="result-note reveal" style="margin-top:16px">
-      <span class="dot"></span>
-      <p><strong>Takeaway:</strong> The results support explicit active-plan reassessment as an effective mechanism for robust action-chunk execution under dynamic disturbances.</p>
     </div>
   </div>
 </section>
@@ -456,21 +452,19 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Behavior Analysis</div>
-      <h2>When replanning fires and what happens next</h2>
-      <p class="lead">Action consistency determines <em>when</em> the active plan should be reconsidered, while the chunk-level critic determines <em>which</em> replacement to use after replanning is triggered.</p>
+      <h2>When to replan, and which candidate to use</h2>
+      <p class="lead">Action consistency triggers replanning; the chunk-level critic ranks replacement candidates.</p>
     </div>
     <div class="result-grid">
       <div class="panel figure reveal">
         <img src="Figure/case_study.png" alt="Qualitative comparison between non-adaptive execution and WatchOut under a disturbance" data-lightbox>
-        <div class="caption"><strong>Qualitative case study.</strong> Without adaptive execution, the pre-disturbance chunk continues. WatchOut detects action inconsistency, replans, and updates the active chunk.</div>
+        <div class="caption"><strong>Qualitative analysis.</strong> WatchOut detects action inconsistency and updates the active chunk after disturbance.</div>
       </div>
       <div class="panel figure reveal delay-1">
         <img src="Figure/action_consistency.png" alt="Replanning score and Q-guided candidate selection analysis" data-lightbox>
-        <div class="caption"><strong>Retain-or-replan analysis.</strong> The replanning score determines when the active chunk is reconsidered. Critic values are used only after that decision to rank newly generated replacement candidates.</div>
+        <div class="caption"><strong>Retain-or-replan analysis.</strong> The replanning score determines when to reconsider the active chunk, while the critic ranks replacement candidates.</div>
       </div>
     </div>
-    <div style="height:18px"></div>
-    <div class="result-note reveal"><span class="dot"></span><p><strong>Interpretation:</strong> WatchOut explicitly separates active-plan reassessment from candidate replacement. Candidate-to-candidate agreement provides complementary evidence for retain-or-replan decisions under stochastic predictions, while value guidance remains downstream of the replanning trigger.</p></div>
   </div>
 </section>
 
@@ -478,26 +472,24 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Real-Robot Evaluation</div>
-      <h2>Physical disturbance recovery with SO-ARM101</h2>
-      <p class="lead">We further deploy WatchOut on an SO-ARM101 robot under external physical disturbances. Task-relevant objects are displaced during action-chunk execution by human intervention or interaction with another robot, without resetting the episode.</p>
-    </div>
-
-    <div class="real-grid">
-      <div class="real-card reveal"><h3>Selective replanning</h3><p>WatchOut reassesses the active chunk after each updated observation and triggers replanning when the scheduled action becomes inconsistent with current predictions.</p></div>
-      <div class="real-card reveal delay-1"><h3>Closed-loop recovery</h3><p>The selected replacement chunk redirects execution toward the displaced object, allowing the task to continue under real sensing and actuation.</p></div>
+      <h2>Physical disturbances with SO-ARM101</h2>
+      <p class="lead">WatchOut is evaluated under object displacements caused by human intervention or interaction with another robot, without resetting the episode.</p>
     </div>
 
     <div class="real-media-stack">
       <div class="panel figure real-media reveal">
         <div class="media-label">Real-world trajectories</div>
         <img src="Figure/realworld.png" alt="Real-world WatchOut evaluation on Stack Cube, Push Cube, and Pick and Place using the SO-ARM101 robot" data-lightbox>
-        <div class="caption"><strong>Real-world evaluation.</strong> Stack Cube, Push Cube, and Pick and Place under external physical disturbances. Orange boxes mark replanning events, and the final frames show successful task completion.</div>
+        <div class="caption"><strong>Real-world evaluation.</strong> Orange boxes mark replanning events; the final frames show successful task completion.</div>
       </div>
 
-      <div class="panel figure real-media gif reveal delay-1">
+      <div class="panel figure real-media reveal delay-1">
         <div class="media-label">Real-world video</div>
-        <img src="Figure/realworld.mp4" alt="Real-world WatchOut execution under physical disturbances using the SO-ARM101 robot">
-        <div class="caption"><strong>Real-world execution.</strong> The sequence shows WatchOut responding online to disturbance-induced scene changes and continuing execution without resetting the episode.</div>
+        <video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#f8fafc">
+          <source src="Figure/realworld.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="caption"><strong>Real-world execution.</strong> WatchOut responds online to disturbance-induced scene changes.</div>
       </div>
     </div>
   </div>
