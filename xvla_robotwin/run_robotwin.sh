@@ -1,7 +1,7 @@
 #!/bin/bash
 source ~/anaconda3/etc/profile.d/conda.sh; conda activate xvla2
 cd ${XVLA_ROOT:?set XVLA_ROOT}/evaluation/robotwin-2.0
-TASK=$1; ACTOR=$2; TAG=$3; NPAR=${4:-4}; DELTA=${5:-0.05}
+TASK=$1; ACTOR=$2; TAG=$3; NPAR=${4:-4}; DELTA=${5:-0.20}
 SEEDS=$(seq ${S0:-1000} ${S1:-1059}); n=0
 OUT=${RESULTS_DIR:-./results}/$TAG
 mkdir -p $OUT
