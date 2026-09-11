@@ -1,4 +1,7 @@
 # WatchOut
+> Active-Plan Reassessment for Adaptive Action-Chunk Execution in Vision-Language-Action Models
+
+<img width="1000" alt="framework" src="https://github.com/user-attachments/assets/2700ec1a-dbfa-48b5-83aa-4a9817f5f3cb" />
 
 ## Setup
 
