@@ -1,0 +1,57 @@
+# TrainConfig entries added by WatchOut.
+# Insert these into the _CONFIGS list in src/openpi/training/config.py
+
+    TrainConfig(
+        name="pi05_base_aloha_robotwin_lora_mt_iql_std",
+        model=pi05_iql_std.Pi0IQLConfig(
+            pi05=True,
+            paligemma_variant="gemma_2b_lora",
+            action_expert_variant="gemma_300m_lora",
+            use_iql=True,
+            critic_width=256,
+            critic_num_layers=3,
+            critic_num_heads=8,
+            value_width=256,
+            value_num_layers=3,
+            value_num_heads=8,
+            critic_gamma=0.99,
+            q_loss_weight=1.0,
+            value_loss_weight=1.0,
+            expectile=0.7,
+            advantage_beta=3.0,
+            max_advantage_weight=20.0,
+            normalize_advantage_weights=True,
+        ),
+        data=LeRobotAlohaDataConfig(
+            repo_id="YOUR_HF_USER/robotwin_multitask",
+            adapt_to_pi=False,
+            repack_transforms=_transforms.Group(inputs=[
+                _transforms.RepackTransform({
+                    "images": {
+                        "cam_high": "observation.images.cam_high",
+                        "cam_left_wrist": "observation.images.cam_left_wrist",
+                        "cam_right_wrist": "observation.images.cam_right_wrist",
+                    },
+                    "state": "observation.state",
+                    "actions": "action",
+                    "prompt": "prompt",
+                })
+            ]),
+            base_config=DataConfig(
+                prompt_from_task=True,
+            ),
+        ),
+        freeze_filter=pi05_iql_std.Pi0IQLConfig(
+            pi05=True,
+            paligemma_variant="gemma_2b_lora",
+            action_expert_variant="gemma_300m_lora",
+            use_iql=True,
+        ).get_freeze_filter(),
+        batch_size=32,
+        weight_loader=iql_weight_loaders.CheckpointWithIQLWeightLoader(
+            "gs://openpi-assets/checkpoints/pi05_base/params"
+        ),
+        num_train_steps=30000,
+        fsdp_devices=1,
+        wandb_enabled=True,
+    ),
