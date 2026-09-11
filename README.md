@@ -78,8 +78,3 @@ CHUNK_MODE=cs_q CS_NCAND=16 PERTURB_ACTOR=porcelain_mug_1 \
 # pi0.5 + RoboTwin      <gpu> <task> <actor> <tag> <seed0> <mode> <n_parallel>
 ./run_robotwin.sh 0 stack_bowls_two bowl1 mytag 1000 pr 6
 ```
-
-## Env vars
-
-`WATCHOUT_COMMON` `XVLA_ROOT` `ROBOTWIN_ROOT` `OPENPI_ROOT` `RESULTS_DIR`
-`CS_NCAND` `CS_VERBOSE` `SERVE_CANDS` `IQL_CRITIC_PATH`
